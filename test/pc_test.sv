@@ -5,19 +5,19 @@ module PC_test;
 
     reg [31:0] vectornum, errors;
     reg [SZ-1:0] testvectors[10000:0];
-    
+
     reg [15:0] in;
     reg inc, ld, reset_test;
     reg [15:0] out_expected;
-    
+
     wire [15:0] out;
-    
+
     PC sut(in, inc, ld, clk, reset | reset_test, out);
 
     always begin
-        clk = 1; 
-        #10; 
-        clk = 0; 
+        clk = 1;
+        #10;
+        clk = 0;
         #10;
     end
 
@@ -35,7 +35,7 @@ module PC_test;
     // check results on falling edge of clk
     always @(negedge clk) begin
         if (~reset) begin
-            if (out !== out_expected)  begin 
+            if (out !== out_expected)  begin
                 $display("Test: %d", vectornum + 1);
                 $display("Error: inputs = %b", {in, reset_test, ld, inc});
                 $display(" outputs = %b (%b exp)", out, out_expected);
@@ -43,10 +43,10 @@ module PC_test;
             end
 
             vectornum = vectornum + 1;
-            if (testvectors[vectornum] === {SZ{1'bx}}) begin 
+            if (testvectors[vectornum] === {SZ{1'bx}}) begin
                 $display("PC:\t\tResults %d tests completed with %d errors", vectornum, errors);
                 if (errors) $error("Verification failed");
-                $finish; // End simulation 
+                $finish; // End simulation
             end
         end
     end

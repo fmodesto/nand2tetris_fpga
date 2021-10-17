@@ -5,7 +5,7 @@ module ALU_test;
 
     reg [31:0] vectornum, errors;
     reg [SZ-1:0] testvectors[10000:0];
-    
+
     reg [15:0] x;
     reg [15:0] y;
     reg zx, nx, zy, ny, f, no;
@@ -18,9 +18,9 @@ module ALU_test;
     ALU sut(x, y, zx, nx, zy, ny, f, no, out, zr, ng);
 
     always begin
-        clk = 1; 
-        #10; 
-        clk = 0; 
+        clk = 1;
+        #10;
+        clk = 0;
         #10;
     end
 
@@ -38,7 +38,7 @@ module ALU_test;
     // check results on falling edge of clk
     always @(negedge clk) begin
         if (~reset) begin
-            if ({out, zr, ng} !== {out_expected, zr_expected, ng_expected})  begin 
+            if ({out, zr, ng} !== {out_expected, zr_expected, ng_expected})  begin
                 $display("Test: %d", vectornum);
                 $display("Error: inputs = %b", {x, y, zx, nx, zy, ny, f, no});
                 $display(" outputs = %b (%b exp)", {out, zr, ng}, {out_expected, zr_expected, ng_expected});
@@ -46,10 +46,10 @@ module ALU_test;
             end
 
             vectornum = vectornum + 1;
-            if (testvectors[vectornum] === {SZ{1'bx}}) begin 
+            if (testvectors[vectornum] === {SZ{1'bx}}) begin
                 $display("ALU:\t\tResults %d tests completed with %d errors", vectornum, errors);
                 if (errors) $error("Verification failed");
-                $finish; // End simulation 
+                $finish; // End simulation
             end
         end
     end

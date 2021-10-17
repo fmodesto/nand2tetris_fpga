@@ -13,11 +13,11 @@ module PC (
 
     input [15:0] in;
     input inc, ld, clk, reset;
-    
+
     output [15:0] out;
-    
+
     reg [15:0] out;
-    
+
     always @ (posedge clk, posedge reset) begin
         if (reset)
             out <= 0;
@@ -26,5 +26,5 @@ module PC (
         else if (inc)
             out <= out + 16'd1;
    end
-    
+
 endmodule

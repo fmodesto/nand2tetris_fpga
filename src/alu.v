@@ -2,7 +2,7 @@
  * The ALU (Arithmetic Logic Unit).
  * Computes one of the following functions:
  * x+y, x-y, y-x, 0, 1, -1, x, y, -x, -y, !x, !y,
- * x+1, y+1, x-1, y-1, x&y, x|y on two 16-bit inputs, 
+ * x+1, y+1, x-1, y-1, x&y, x|y on two 16-bit inputs,
  * according to 6 input bits denoted zx,nx,zy,ny,f,no.
  */
 module ALU (
@@ -35,15 +35,15 @@ module ALU (
     wire [15:0] yn;
 
     wire [15:0] of;
-    
+
     assign xz = zx ? 16'b0 : x;
     assign xn = nx ? ~xz : xz;
-    
+
     assign yz = zy ? 16'b0 : y;
     assign yn = ny ? ~yz : yz;
-    
+
     assign of = f ? xn + yn : xn & yn;
-    
+
     assign out = no ? ~of : of;
     assign zr = out == 16'b0;
     assign ng = out[15];
